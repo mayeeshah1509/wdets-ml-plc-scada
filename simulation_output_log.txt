@@ -1,0 +1,59 @@
+A1 efficiency vs distance
+5 0.427 96.8 96.8
+8 0.343 95.8 96.0
+10 0.288 94.7 95.2
+12 0.238 93.0 94.3
+15 0.177 89.0 92.4
+20 0.108 76.6 87.8
+25 0.068 57.3 81.4
+30 0.045 36.9 73.1
+A2 detuning and PLC capacitor retune (d=10 cm)
+PF before 0.8851071128424609 PF after 0.9991385349955909 eta before 0.8998700250132019 eta after 0.8998700250132019 within 1 step 0.954
+min PF before 0.3759077970939335 min PF after 0.9868606333869286
+example delta 0.0 PF 1.0 eta 94.7 -> step 0.0 %  PF 1.0 eta 94.7
+example delta 0.03 PF 0.987 eta 94.7 -> step -3.0 %  PF 1.0 eta 94.7
+example delta 0.06 PF 0.95 eta 94.7 -> step -5.5 %  PF 1.0 eta 94.7
+B site PF (test = last 10 days, n=2880)
+No compensation {'pf': np.float64(0.774), 'pfE': np.float64(0.77), 'low': np.float64(99.653), 'sw': np.float64(0.0), 'loss': np.float64(100.0)}
+SCADA-reactive (uses last scan) {'pf': np.float64(0.971), 'pfE': np.float64(0.968), 'low': np.float64(11.944), 'sw': np.float64(73.6), 'loss': np.float64(63.399)}
+ML-PLC ridge forecast {'pf': np.float64(0.972), 'pfE': np.float64(0.969), 'low': np.float64(11.181), 'sw': np.float64(67.6), 'loss': np.float64(63.346)}
+ML-PLC gradient-boosting forecast {'pf': np.float64(0.972), 'pfE': np.float64(0.969), 'low': np.float64(10.938), 'sw': np.float64(66.0), 'loss': np.float64(63.353)}
+Oracle (perfect knowledge) {'pf': np.float64(0.973), 'pfE': np.float64(0.97), 'low': np.float64(7.153), 'sw': np.float64(73.7), 'loss': np.float64(63.303)}
+Q forecast RMSE ridge 26.353460843516874 naive 27.387884951911495 gbr 26.48053964754709
+raw PF mean uncompensated train+test 0.773204686381161
+C training gains
+0.06 0.72 [0.483, 11.682, 0.04]
+0.08 0.84 [0.773, 10.994, 0.06]
+0.1 1.0 [0.796, 9.66, 0.055]
+0.12 1.21 [0.495, 8.0, 0.013]
+0.14 1.47 [0.462, 6.325, 0.039]
+0.16 1.8 [0.34, 5.09, 0.016]
+0.18 2.2 [0.636, 4.358, 0.027]
+0.2 2.67 [0.503, 3.427, 0.012]
+fixed gains (tuned at 10 cm) (0.7957067422354476, 9.660456858842746, 0.054809004985676486)
+C test: d, g, fixed(OS,Ts,ISE) | ML-sched | oracle
+7 0.77 [np.float64(0.0), np.float64(0.59), np.float64(0.06), np.float64(0.0)] [np.float64(0.17), np.float64(0.47), np.float64(0.05), np.float64(0.0)] [np.float64(0.05), np.float64(0.46), np.float64(0.05), np.float64(0.0)]
+9 0.91 [np.float64(0.07), np.float64(0.45), np.float64(0.05), np.float64(0.0)] [np.float64(0.24), np.float64(0.46), np.float64(0.05), np.float64(0.0)] [np.float64(0.5), np.float64(0.38), np.float64(0.05), np.float64(0.0)]
+11 1.1 [np.float64(0.9), np.float64(0.41), np.float64(0.04), np.float64(0.0)] [np.float64(0.26), np.float64(0.45), np.float64(0.05), np.float64(0.0)] [np.float64(0.07), np.float64(0.45), np.float64(0.04), np.float64(0.0)]
+13 1.33 [np.float64(3.36), np.float64(0.54), np.float64(0.04), np.float64(0.0)] [np.float64(0.2), np.float64(0.45), np.float64(0.04), np.float64(0.0)] [0, np.float64(0.56), np.float64(0.04), np.float64(0.0)]
+15 1.63 [np.float64(8.12), np.float64(0.62), np.float64(0.03), np.float64(0.0)] [np.float64(0.07), np.float64(0.54), np.float64(0.04), np.float64(0.0)] [np.float64(0.53), np.float64(0.36), np.float64(0.05), np.float64(0.0)]
+17 1.99 [np.float64(14.63), np.float64(0.67), np.float64(0.03), np.float64(0.0)] [0, np.float64(0.55), np.float64(0.04), np.float64(0.0)] [np.float64(0.1), np.float64(0.47), np.float64(0.05), np.float64(0.0)]
+19 2.42 [np.float64(22.38), np.float64(0.95), np.float64(0.02), np.float64(0.01)] [0, np.float64(0.66), np.float64(0.04), np.float64(0.0)] [np.float64(1.61), np.float64(0.55), np.float64(0.03), np.float64(0.0)]
+avg fixed 7.065564430835293 0.6042857142857143 worst OS fixed 22.38184011928157
+avg sched 0.13312339042272597 0.5114285714285715 worst OS sched 0.25941222421124177
+avg oracle 0.406844470540757 0.46142857142857147
+noise 0.5% fixed (np.float64(8.498551443174573), np.float64(0.618), np.float64(0.03147197048533094), np.float64(0.1216540802295718)) sched (np.float64(0.5768723116639229), np.float64(0.542), np.float64(0.04220176512236466), np.float64(0.05956902376667017))
+nominal plant: open-loop OS 37.23177192599609
+P (0, np.float64(3.0), np.float64(0.7621027970281588), np.float64(50.0000000166833)) PI (0, np.float64(0.978), np.float64(0.05669331057198613), np.float64(0.001959262931361394)) PID (np.float64(0.3349956937920284), np.float64(0.428), np.float64(0.04431884373255741), np.float64(5.446443296364123e-09))
+margins (derivative filter pole 15 rad/s, ZOH delay 0.5 scan)
+0.07 0.77 fixed [np.float64(33.3), 11.0] sched [np.float64(122.3), 11.6]
+0.11 1.1 fixed [np.float64(21.3), 7.9] sched [np.float64(30.5), 10.2]
+0.15 1.63 fixed [np.float64(11.0), 4.5] sched [np.float64(24.1), 8.7]
+0.19 2.42 fixed [np.float64(2.4), 1.0] sched [np.float64(18.4), 7.1]
+routh all test sched True fixed [True, True, True, True, True, True, True]
+SCADA 24 tags @1s per day 2073600
+D packets
+1 [np.float64(50.23), np.float64(28.6), np.float64(10.42), np.float64(49.77), np.float64(52.0), np.float64(39.4), np.float64(15.69), np.float64(0.52)]
+2 [np.float64(75.11), np.float64(64.3), np.float64(5.21), np.float64(49.77), np.float64(76.0), np.float64(69.7), np.float64(7.85), np.float64(0.52)]
+5 [np.float64(90.05), np.float64(85.72), np.float64(2.08), np.float64(49.77), np.float64(90.4), np.float64(87.88), np.float64(3.14), np.float64(0.52)]
+10 [np.float64(95.02), np.float64(92.86), np.float64(1.04), np.float64(49.77), np.float64(95.2), np.float64(93.94), np.float64(1.57), np.float64(0.52)]
