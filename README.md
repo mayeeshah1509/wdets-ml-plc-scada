@@ -35,6 +35,3 @@ The script runs four parts:
 - Output-voltage plant: second order, wn = 30 rad/s, zeta = 0.3, gain g = k_nom / k (assumed, not identified from hardware)
 - Site load data is synthetic
 
-## License
-
-Add a license before publishing (for example MIT).
